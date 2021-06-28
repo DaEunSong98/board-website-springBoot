@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.page.demo.board.dto.BoardDTO;
 import com.page.demo.board.service.BoardService;
@@ -26,7 +27,7 @@ public class BoardController {
 	@GetMapping("home")
 		public String Home() {
 		
-		return "Practice";
+		return "Home";
 
 	}
 	
@@ -43,22 +44,16 @@ public class BoardController {
 	}
 	
 	@PostMapping("/board/insert")
-	public String PostInsertBoard(BoardDTO dto ,HttpSession session) {
+	public String PostInsertBoard(BoardDTO dto ,HttpSession session,RedirectAttributes rttr,Model model) {
 		try {
 			MemberDTO member=(MemberDTO) session.getAttribute("member");
-			if(member==null) {
-				//로그인 해라 
-				return "Member/login";
-			}
-			else {
 				dto.setWriter(member.getId());
 				bs.insert(dto);
-			
-			}
+				rttr.addFlashAttribute("msg",true);
 		}
 		catch(DataAccessException e) {} //데이터베이스 처리 과정에 문제
 		catch(Exception e) {} 	//시스템에 문제 
-		return "Board/insert";
+		return "redirect:insert";
 	}
 	
 	@GetMapping("/board/view")
@@ -74,10 +69,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/board/update")
-	public String PostUpdateBoard(BoardDTO dto) {
-	
+	public String PostUpdateBoard(BoardDTO dto,Model model) {
 		bs.update(dto);
-		return "Home";
+		return "redirect:/board/list";
 	}
 	
 	@GetMapping("/board/delete")

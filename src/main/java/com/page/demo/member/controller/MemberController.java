@@ -28,7 +28,7 @@ public class MemberController {
 
 	@GetMapping("home")
 	public String Gethome(){
-		return "Home";
+		return "redirect:/home";
 	}
 	
 	@PostMapping("home")
@@ -101,7 +101,7 @@ public class MemberController {
 	@PostMapping("login")
 	public String PostLoginMember(MemberDTO dto, HttpSession session){
 			ms.login(dto.getId(),dto.getPw(), session);
-		return "Member/delete";
+		return "Member/login";
 	}
 
 	

@@ -21,8 +21,6 @@
 </tr>
 </table>
 
-
 	<a href="update?idx=${dto.idx}">수정하기</a>
-	<a href="delete?idx=${dto.idx}">삭제하기</a>
 </body>
 </html>
