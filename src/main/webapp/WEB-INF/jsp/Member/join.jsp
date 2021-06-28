@@ -1,96 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="EUC-KR"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<<<<<<< HEAD
-<!DOCTYPE>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
+  <meta charset="utf-8">
+<title>íšŒì›ê°€ì…</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 
+<body> 
+<h2>íšŒì›ê°€ì…</h2>
 
-<body>
-<h2>È¸¿ø°¡ÀÔ</h2>
-${checkingValue}
-<form action="join" method="post"> <!-- ¿©±â¼­ÀÇ formÀº ¸ÅÇÎ ÀÌ¸§ -->
-	<input type="text" name="id" id="id" placeholder="¾ÆÀÌµğ" value="${dto.id}">
-	<button class="idChk" type="button" id="idChk" onclick="fn_Check();" >Áßº¹ È®ÀÎ</button>
+
+<form action="join" method="post"> <!-- ì—¬ê¸°ì„œì˜ formì€ ë§¤í•‘ ì´ë¦„ -->
+	<input type="text" id="id" name="id" placeholder="ì•„ì´ë””" value="${dto.id}">
+	<button class="idChk" type="button" id="id_check" onclick="fn_Check();" >ì¤‘ë³µ í™•ì¸</button>
     ${valid_id}<br>    
-	<input type="password" name="pw" id="pw"placeholder="ÆĞ½º¿öµå">
+	<input type="password" id="pw" name="pw" placeholder="íŒ¨ìŠ¤ì›Œë“œ">
 	${valid_pw}<br>
-	<input type="password" name="pw_check" id="pw_check" placeholder="ÆĞ½º¿öµå È®ÀÎ">
-	<!--  ${check}<br>-->
+	<input type="password" id="pw_check" name="pw_check" placeholder="íŒ¨ìŠ¤ì›Œë“œ í™•ì¸">
 	<div class="check_font" id="pwCheck"></div>
-	
-=======
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-<!-- 
-<script type="text/javascript">
-function joinCheck(){
-	var $id=$("#id");
-	var $pw=$("#pw");
-	
-	if($id.val().trim().length==0){
-		alert('¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä');
-		$id.focus();
-		return false;
-	}
-	
-	if($pw.val().trim().length==0){
-		alert('ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä')
-		$pw.focus();
-		return false;
-	}
-	if(confirm("È¸¿ø°¡ÀÔ ÇÏ½Ã°Ú½À´Ï±î?")){
-		alert("È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
-		$("form").submit();
-	}
-	return true;
-}
-	
-
-</script>
- -->
-
-<h2>È¸¿ø°¡ÀÔ</h2>
-
-<form action="join" method="post"> <!-- ¿©±â¼­ÀÇ formÀº ¸ÅÇÎ ÀÌ¸§ -->
-	<input type="text" name="id" placeholder="¾ÆÀÌµğ" value="${dto.id}">
-    ${valid_id}<br>    
-	<input type="password" name="pw" placeholder="ÆĞ½º¿öµå">
-	${valid_pw}<br>
-	<input type="password" name="pw_check" placeholder="ÆĞ½º¿öµå È®ÀÎ">
-	${check}<br>
->>>>>>> b67e7d9fb1d52cc32043668afb99a5ff0489ee3e
-	<input type="text" name="name" placeholder="ÀÌ¸§" value="${dto.name}">	
+	<input type="text" name="name" placeholder="ì´ë¦„" value="${dto.name}">	
 	${valid_name}<br>
-	<input type="text" name="email" placeholder="ÀÌ¸ŞÀÏ" value="${dto.email}">
+	<input type="text" name="email" placeholder="ì´ë©”ì¼" value="${dto.email}">
 	${valid_email}<br>	
-	<input type="text" name="mobile" placeholder="ÀüÈ­¹øÈ£" value="${dto.mobile}"><br>
-	<input type="text" name="address" placeholder="ÁÖ¼Ò" value="${dto.address}" ><br>
-<<<<<<< HEAD
- 	<input type="submit" value="È¸¿ø°¡ÀÔ" onclick="idCheck();"/>	
-	</form>
-	
-	
-	
+	<input type="text" name="mobile" placeholder="ì „í™”ë²ˆí˜¸" value="${dto.mobile}"><br>
+	<input type="text" name="address" placeholder="ì£¼ì†Œ" value="${dto.address}" ><br>
+ 	<input type="submit" value="íšŒì›ê°€ì…" onclick="idCheck();"/>	
+</form>
+
+
 	<script>
 	function valid(){
 		if(checkingValue==true)
-			alert('È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.');
+			alert('íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.');
 			
 	}
-	
 	
 	function fn_Check(){
 		
@@ -99,11 +44,11 @@ function joinCheck(){
 			data: {"id" : $("#id").val()},
 			success:function(data){
 				if(data==1){
-					alert("Áßº¹µÈ ¾ÆÀÌµğÀÔ´Ï´Ù. ");
+					alert("ì¤‘ë³µëœ ì•„ì´ë””ì…ë‹ˆë‹¤. ");
 				}
-				else alert("»ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+				else alert("ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.");
 			},error:function(){
-				console.log("½Ã½ºÅÛ ¿À·ùÀÔ´Ï´Ù.");
+				console.log("ì‹œìŠ¤í…œ ì˜¤ë¥˜ì…ë‹ˆë‹¤.");
 			}
 		});
 	}
@@ -111,7 +56,7 @@ function joinCheck(){
 	$( "#pw_check" ).blur(function() {
 		var pw=$('#pw').val();
 		var pw_check=$('#pw_check').val();
-		if(pw!=pw_check) $('#pwCheck').text("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+		if(pw!=pw_check) $('#pwCheck').text("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		else  $('#pwCheck').text("");
 	});
 					
@@ -119,29 +64,24 @@ function joinCheck(){
 	
 </script>
 
-	
-=======
- 	<input type="submit" value="È¸¿ø°¡ÀÔ"/>	
-	</form>
-	
-	
->>>>>>> b67e7d9fb1d52cc32043668afb99a5ff0489ee3e
-	<!-- <label for = "gender">¼ºº° : </label> -
-	¼ºº°: 
-  <input type = "radio" name = "gender" value = "³²ÀÚ" id="woman" checked = "checked"> ³²ÀÚ    
-  <input type = "radio" name = "gender" value = "¿©ÀÚ" id="man"> ¿©ÀÚ<br>
+
+
+	<!-- <label for = "gender">ì„±ë³„ : </label> -
+	ì„±ë³„: 
+  <input type = "radio" name = "gender" value = "ë‚¨ì" id="woman" checked = "checked"> ë‚¨ì    
+  <input type = "radio" name = "gender" value = "ì—¬ì" id="man"> ì—¬ì<br>
   -->
- <!--  »ı³â ¿ùÀÏ: 
-  <input type="text" name="birthYear" placeholder="³â(4±ÛÀÚ)">	
+ <!--  ìƒë…„ ì›”ì¼: 
+  <input type="text" name="birthYear" placeholder="ë…„(4ê¸€ì)">	
   <select name="birthMonth">
-  	<option value="1">1¿ù</option>
-  	<option value="2">2¿ù</option>
-  	<option value="3">3¿ù</option>
+  	<option value="1">1ì›”</option>
+  	<option value="2">2ì›”</option>
+  	<option value="3">3ì›”</option>
   </select> 
-  <input type="text" name="birthDate" placeholder="ÀÏ"><br>
+  <input type="text" name="birthDate" placeholder="ì¼"><br>
  --> 
 
-	<!-- <input type="button" value="Ãë¼Ò" onclick="javascript:location.href='index';">  -->
+	<!-- <input type="button" value="ì·¨ì†Œ" onclick="javascript:location.href='index';">  -->
 
 </body>
 </html>

@@ -27,13 +27,14 @@ public class MemberController {
 
 	@GetMapping("home")
 	public String Gethome(){
-		return "Home";
+		return "Member/Practice";
 	}
 	
 	@PostMapping("home")
 	public String Posthome(){
-		return "Home";
+		return "Member/Home";
 	}
+	
 	@ResponseBody
 	@PostMapping("idChk")
 	public int PostidChk(@RequestParam("id")String id) {
@@ -48,11 +49,6 @@ public class MemberController {
 		return ms.idCheck(id);
 	}
 	
-	
-	@GetMapping("home")
-	public String home(){
-		return "Home";
-	}
 	
 	@GetMapping("join")
 	public String GetJoinMember(){
