@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.page.demo.member.dto.MemberDTO;
 import com.page.demo.member.service.MemberService;
@@ -27,7 +28,7 @@ public class MemberController {
 
 	@GetMapping("home")
 	public String Gethome(){
-		return "Member/Practice";
+		return "Home";
 	}
 	
 	@PostMapping("home")
@@ -88,7 +89,7 @@ public class MemberController {
 			}
 		}
 			
-		return "Member/join";
+		return "Member/login";
 	}
 	
 	
@@ -99,8 +100,8 @@ public class MemberController {
 	
 	@PostMapping("login")
 	public String PostLoginMember(MemberDTO dto, HttpSession session){
-			int ret=ms.login(dto.getId(),dto.getPw(), session);
-		return "Member/login";
+			ms.login(dto.getId(),dto.getPw(), session);
+		return "Member/delete";
 	}
 
 	
@@ -133,15 +134,22 @@ public class MemberController {
 	}
 	
 	@PostMapping("delete")
-	public String PostDeleteMember(@RequestParam(value="pw")String pw, @RequestParam(value="pw_check")String pw_check, HttpSession session){
+	public String PostDeleteMember(@RequestParam(value="pw")String pw, @RequestParam(value="pw_check")String pw_check, HttpSession session
+			,RedirectAttributes rttr) {
 			MemberDTO tmp=(MemberDTO)session.getAttribute("member");
-			ms.delete(tmp.getId(),pw,pw_check);
-		return "redirect:logout";
+			if(!tmp.getPw().equals(pw)) {
+				rttr.addFlashAttribute("result",true);
+				return "redirect:/member/delete";
+			}
+			else {
+				 if(!pw.equals(pw_check)) {
+					 rttr.addFlashAttribute("result",false);
+					 return "redirect:/member/delete";
+				 }
+				 
+				 else ms.delete(tmp.getId());
+					 
+			}
+			return "redirect:/member/logout";
 	}
-	
-	
-	
-	
-	
-	
 }

@@ -11,7 +11,6 @@
 <body> 
 <h2>회원가입</h2>
 
-
 <form action="join" method="post"> <!-- 여기서의 form은 매핑 이름 -->
 	<input type="text" id="id" name="id" placeholder="아이디" value="${dto.id}">
 	<button class="idChk" type="button" id="id_check" onclick="fn_Check();" >중복 확인</button>
@@ -26,14 +25,18 @@
 	${valid_email}<br>	
 	<input type="text" name="mobile" placeholder="전화번호" value="${dto.mobile}"><br>
 	<input type="text" name="address" placeholder="주소" value="${dto.address}" ><br>
- 	<input type="submit" value="회원가입" onclick="idCheck();"/>	
-</form>
+ 	<input type="submit" value="회원가입" onclick="valid();"/>	
+	</form>
 
 
 	<script>
+	var id_check=false;
 	function valid(){
-		if(checkingValue==true)
+		if(id_check==true)
 			alert('회원가입이 완료되었습니다.');
+		else {
+			alert("아이디를 다시 확인해주세요");
+		}
 			
 	}
 	
@@ -45,8 +48,12 @@
 			success:function(data){
 				if(data==1){
 					alert("중복된 아이디입니다. ");
+					id_check=false;
 				}
-				else alert("사용가능한 아이디입니다.");
+				else{
+					alert("사용가능한 아이디입니다.");
+					id_check=true;
+				}
 			},error:function(){
 				console.log("시스템 오류입니다.");
 			}

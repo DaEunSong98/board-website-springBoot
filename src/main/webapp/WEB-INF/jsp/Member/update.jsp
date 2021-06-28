@@ -5,14 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
 <script>
 function Check(){
 	alert('수정 완료 되었습니다.');
 }
 </script>
-=======
->>>>>>> b67e7d9fb1d52cc32043668afb99a5ff0489ee3e
 </head>
 <body>
 
@@ -26,11 +23,7 @@ function Check(){
 	 		전화번호: <input type="text" name="mobile" value="${member.mobile }"  ><br>
 	 		
 	 		
-<<<<<<< HEAD
 			<input type="submit" value="수정완료" onclick="Check();">
-=======
-			<input type="submit" value="수정완료">
->>>>>>> b67e7d9fb1d52cc32043668afb99a5ff0489ee3e
 			<input type="button" value="취소" onclick="javascript:location.href='home';">
 		</form>
 		

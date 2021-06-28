@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.page.demo.member.dao.MemberMappers;
 import com.page.demo.member.dto.MemberDTO;
@@ -28,17 +30,15 @@ public class MemberService {
 	}
 
 
-	public int login(@RequestParam(value="id") String id,
+	public void login(@RequestParam(value="id") String id,
 			@RequestParam(value="pw") String pw, HttpSession session) {
 		
 		MemberDTO tmp = mapper.selectId(id);
 		if(tmp != null && id != "") {
 			if(tmp.getPw().equals(pw)) {
 				session.setAttribute("member",tmp );
-				return 1;
 			}
 		}
-		return 0;
 	}
 
 
@@ -48,14 +48,10 @@ public class MemberService {
 	}
 
 
-	public void delete(String id, String pw, String pw_check) {
+	public void delete(String id) {
 		// TODO Auto-generated method stub
-		MemberDTO dto=mapper.selectId(id);
-		if(pw!="") {
-			if(pw.equals(pw_check)&& dto.getPw().equals(pw)) {
-				mapper.delete(id); 
-			}
-		}
+		
+		mapper.delete(id);
 	}
 
 
