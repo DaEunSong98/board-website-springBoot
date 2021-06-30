@@ -69,10 +69,9 @@ public class MemberService {
 	public int idCheck(String id) {
 		// TODO Auto-generated method stub
 		MemberDTO dto=mapper.selectId(id);
+
+		if(id=="") return -1;
 		if(dto==null) return 0;
 		else return 1;
 	}
 }
-
-
-

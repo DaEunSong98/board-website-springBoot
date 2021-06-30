@@ -45,8 +45,8 @@ public class MemberController {
 	
 	@ResponseBody
 	@GetMapping("idChk")
-	public int GetidChk(String id) {
-		
+	public int GetidChk(@RequestParam("id")String id) {
+
 		return ms.idCheck(id);
 	}
 	
@@ -58,7 +58,7 @@ public class MemberController {
 	
 	@PostMapping("join")
 	public String PostJoinMember(@RequestParam("pw_check")String pw_check,
-			@Valid MemberDTO dto, BindingResult result, Model model){
+			@Valid MemberDTO dto, BindingResult result, RedirectAttributes rttr){
 	
 		/*if(result.hasErrors()) {
 			List<ObjectError>list=result.getAllErrors();
@@ -66,8 +66,8 @@ public class MemberController {
 				System.out.println("1. "+error);
 		}
 		*/
-		//비밀번호 일치 여부
-		if(result.hasErrors()) {
+		//유효성 검사 에러 발생 시 
+		/*if(result.hasErrors()) {
 			Map<String, String> validResult=ms.validateHandling(result);
 			model.addAttribute("dto",dto);
 			for(String key: validResult.keySet()) {
@@ -75,20 +75,12 @@ public class MemberController {
 				System.out.println(key);
 				System.out.println(validResult.get(key));
 			}
-		}
+		}*/
 		
-		else {
-			if(dto.getPw().equals(pw_check)){
-					ms.insert(dto);	
-					model.addAttribute("checkingValue","false");
+		ms.insert(dto);	
+		rttr.addFlashAttribute("checkingValue",true);
 
-			}
-			else {
-				model.addAttribute("dto",dto);
-				//비밀번호 불일치는 일단 모르겠다....
-			}
-		}
-			
+
 		return "Member/login";
 	}
 	
