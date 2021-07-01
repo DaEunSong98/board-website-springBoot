@@ -35,13 +35,14 @@ public class CommentController {
 		
 		return "Board/Comment/insert";
 	}
+	@ResponseBody
 	@PostMapping("insert")
 	public String PostComentInsert(CommentDTO dto, HttpSession session) {
 		MemberDTO tmp=(MemberDTO) session.getAttribute("member");
 		dto.setWriter(tmp.getId());
 		System.out.println(dto.getWriter());
-		cs.insert(dto);
-		return "redirect:insert";
+		
+		return cs.insert(dto);
 	}
 	
 	@GetMapping("update")

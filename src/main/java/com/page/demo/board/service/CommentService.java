@@ -12,7 +12,6 @@ import com.page.demo.board.mapper.CommentMapper;
 @Service
 public class CommentService {
 
-	static private int idx=1;
 	
 	@Autowired
 	CommentMapper mapper;
@@ -23,17 +22,18 @@ public class CommentService {
 		return mapper.list();
 	}
 
-	public void insert(CommentDTO dto) {
+	public String insert(CommentDTO dto) {
 		// TODO Auto-generated method stub
 		dto.setWdate(new Timestamp(System.currentTimeMillis()));
-		dto.setIdx(idx++);
 		System.out.println(dto.getContent());
 		System.out.println(dto.getIdx());
 		System.out.println(dto.getWdate());
 		
 		//임시로 board_idx 지정
 		dto.setBoard_idx(41);
-		mapper.insert(dto);
+		if(dto.getContent()=="") return "fail"; //내용 입력값이 없는 경우
+		if(mapper.insert(dto)) return "success";
+		else return "fail"; //시스템상 오류
 	}
 
 	public void update(CommentDTO dto) {

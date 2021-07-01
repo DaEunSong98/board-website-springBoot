@@ -15,8 +15,8 @@ public interface CommentMapper {
 	
 	public ArrayList<CommentDTO> list();
 
-	@Insert("insert into comments values(#{idx},#{board_idx},#{writer},#{content},#{wdate})")
-	public void insert(CommentDTO dto);
+	@Insert("insert into comments values(comment_idx_seq.nextval,#{board_idx},#{writer},#{content},#{wdate})")
+	public boolean insert(CommentDTO dto);
 
 	public void update(CommentDTO dto);
 
