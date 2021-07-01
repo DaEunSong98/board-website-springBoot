@@ -104,12 +104,21 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String PostUpdateMember(MemberDTO dto, HttpSession session){
+	public String PostUpdateMember(MemberDTO dto, HttpSession session,RedirectAttributes rttr){
 			MemberDTO tmp=(MemberDTO)session.getAttribute("member");
-			System.out.println(tmp.getId());
 			dto.setId(tmp.getId());
-			ms.update(dto);
-		return "Home";
+			//비밀번호가 일치하지 않는 경우 
+			if(!dto.getPw().equals(tmp.getPw())) {
+				rttr.addFlashAttribute("msg",false);
+				
+			}
+			//비밀번호가 일치하는 경우 
+			else {
+				ms.update(dto);
+				rttr.addFlashAttribute("msg",true);
+			}
+			
+			return "redirect:/member/update";
 	}
 	
 	
