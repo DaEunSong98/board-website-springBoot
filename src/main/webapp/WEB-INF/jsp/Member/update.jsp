@@ -41,7 +41,6 @@
 <c:if test="${msg==false}">
 	<script>alert("비밀번호가 일치하지 않습니다. 다시 수정해주세요.")</script>	
 </c:if>
-
 <c:if test="${msg==true}">
 	<script>alert("정보 수정이 완료되었습니다. ");
 			location.href='/home';

@@ -110,7 +110,6 @@ public class MemberController {
 			//비밀번호가 일치하지 않는 경우 
 			if(!dto.getPw().equals(tmp.getPw())) {
 				rttr.addFlashAttribute("msg",false);
-				
 			}
 			//비밀번호가 일치하는 경우 
 			else {
