@@ -1,5 +1,7 @@
 package com.page.demo.board.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -44,16 +47,15 @@ public class BoardController {
 	}
 	
 	@PostMapping("/board/insert")
-	public String PostInsertBoard(BoardDTO dto ,HttpSession session,RedirectAttributes rttr,Model model) {
+	public String PostInsertBoard(BoardDTO dto ,HttpSession session) {
 		try {
 			MemberDTO member=(MemberDTO) session.getAttribute("member");
 				dto.setWriter(member.getId());
 				bs.insert(dto);
-				rttr.addFlashAttribute("msg",true);
 		}
 		catch(DataAccessException e) {} //데이터베이스 처리 과정에 문제
 		catch(Exception e) {} 	//시스템에 문제 
-		return "redirect:insert";
+		return "redirect:list";
 	}
 	
 	@GetMapping("/board/view")

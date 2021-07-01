@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
 
@@ -28,24 +29,42 @@
 </c:if>
 
 
-<form action="update" method="post">
+<form id="updateForm" action="update" method="post">
 <input type="hidden" name="idx" value="${dto.idx}">
 <table border=1>
 <tr>
 	<td>번호</td> <td>${dto.idx }</td>
 </tr>	
 <tr>	
-	<td>제목</td> <td><input type="text" name="title" value="${dto.title}"/></td>
+	<td>제목</td> <td><input type="text" id="title" name="title" value="${dto.title}"/></td>
 </tr>
 <tr>
-	<td>내용</td> <td><input type="text" name="contents" value="${dto.contents}"/></td>
+	<td>내용</td> <td><input type="text" id="contents" name="contents" value="${dto.contents}"/></td>
 </tr>
 </table>
 <input type="submit" value="수정하기"/>
+
 <button id="delete" onclick="javascript:location.href='delete?idx=${dto.idx}';">삭제하기</button>
 
 
 </form>
+
+<script>
+$("#updateForm").submit(function(){
+
+		if($('#title').val()==""){
+			alert("제목을 입력해주세요.");
+			return false;
+		}
+		if($('#contents').val()==""){
+			alert("내용을 입력해주세요.");
+			return false;
+		}
+		alert("글이 수정 되었습니다. ");
+	
+	});
+	
+</script>
 
 </body>
 </html>
