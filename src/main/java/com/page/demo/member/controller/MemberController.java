@@ -110,6 +110,7 @@ public class MemberController {
 			//비밀번호가 일치하지 않는 경우 
 			if(!dto.getPw().equals(tmp.getPw())) {
 				rttr.addFlashAttribute("msg",false);
+				
 			}
 			//비밀번호가 일치하는 경우 
 			else {
@@ -138,18 +139,19 @@ public class MemberController {
 			,RedirectAttributes rttr) {
 			MemberDTO tmp=(MemberDTO)session.getAttribute("member");
 			if(!tmp.getPw().equals(pw)) {
-				rttr.addFlashAttribute("result",true);
-				return "redirect:/member/delete";
+				rttr.addFlashAttribute("msg",true);
 			}
 			else {
 				 if(!pw.equals(pw_check)) {
-					 rttr.addFlashAttribute("result",false);
-					 return "redirect:/member/delete";
+					 rttr.addFlashAttribute("msg",false);
 				 }
 				 
-				 else ms.delete(tmp.getId());
+				 else {
+					 ms.delete(tmp.getId());
+					 session.invalidate();
+				 }
 					 
 			}
-			return "redirect:/member/logout";
+			 return "redirect:/member/delete";
 	}
 }
