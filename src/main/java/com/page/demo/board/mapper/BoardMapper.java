@@ -10,16 +10,18 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.page.demo.board.dto.BoardDTO;
+import com.page.demo.board.paging.Criteria;
 
-@Repository
+
 @Mapper
+@Repository
 public interface BoardMapper {
 
-	@Insert("insert into board values(board_seq.nextval, #{writer}, #{title}, #{contents}, #{Wdate})")
+	@Insert("insert into board values(board_seq.nextval, #{writer}, #{title}, #{contents}, #{Wdate},#{hit})")
 	public void insert(BoardDTO dto);
 
-	@Select("select * from board")
-	public ArrayList<BoardDTO> list();
+	//@Select("select * from board order by idx desc ")
+	//public ArrayList<BoardDTO> list();
 
 	@Select("select * from board where idx=#{idx}")
 	public BoardDTO selectIdx(int idx);
@@ -29,5 +31,19 @@ public interface BoardMapper {
 
 	@Delete("delete from board where idx=#{idx}")
 	public void delete(int idx);
+
+	@Update("update board set hit=#{hit} where idx=#{idx}")
+	public void updateHit(BoardDTO dtp);
+	
+	@Select("select \r\n" + 
+			"		idx,title,wdate,writer\r\n" + 
+			"		from(select rownum rnum, idx,title,wdate,writer \r\n" + 
+			"			from board where rownum <= #{pageNo} * #{countPerp} order by idx desc)\r\n" + 
+			"			where rnum>(#{pageNo}-1) * #{countPerp}")
+	public ArrayList<BoardDTO> list(Criteria criteria);
+
+	@Select ("select count(*) from board") 
+	public int count();
+
 
 }

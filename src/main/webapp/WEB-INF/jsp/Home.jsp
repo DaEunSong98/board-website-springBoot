@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +13,24 @@
 <body>
 
 <h2>인덱스 페이지</h2>
-<a href="join">회원 가입</a>
-<a href="board/insert">게시글 작성</a>
-<a href="board/list">게시글 목록</a>
-<a href="member/login">로그인</a>
-<a href="member/logout">로그아웃</a>
-<a href="update">회원정보 수정</a>
-<a href="delete">회원정보 삭제</a>
+
+
+<a href="board/list">자유게시판</a>
+
+<c:choose>
+	<c:when test="${empty member.id }">	
+		<a href="member/login">로그인</a>
+		<a href="join">회원 가입</a>
+	</c:when>
+	
+	<c:otherwise>
+		<a href="member/logout">로그아웃</a>
+		<a href="member/update">회원정보 수정</a>
+		<a href="member/delete">탈퇴</a>
+	</c:otherwise>
+</c:choose>
+
+<a href="comment/insert?board_idx=41">댓글 작성</a>
 
 
 <div class="row">

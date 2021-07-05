@@ -8,13 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-function check(){
-	if('${id}'!=null){
-		alert('로그인 되었습니다.');
-		<!--여기에 home으로 바로 이동하는 코드 넣기 -->
-	}
-}</script>
+
 
 
 <c:choose>
@@ -27,15 +21,9 @@ function check(){
 		</form>
 	</c:when>
 	<c:otherwise>
-		<c:if test="{${msg}==false}">
-			location.href="board/insert";
-		</c:if>
 		 ${member.id }님은 로그인 되셨습니다.<br>
 		<a href='home'>인덱스 페이지로 이동</a>
 	</c:otherwise>
 </c:choose>
-</body>
-</html>
-
 </body>
 </html>

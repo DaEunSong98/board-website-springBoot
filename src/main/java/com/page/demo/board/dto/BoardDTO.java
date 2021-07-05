@@ -1,5 +1,6 @@
 package com.page.demo.board.dto;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class BoardDTO {
@@ -8,7 +9,8 @@ public class BoardDTO {
 	String writer;
 	String title;
 	String contents;
-	Date Wdate;
+	Timestamp Wdate;
+	int hit;
 	
 	public int getIdx() {
 		return idx;
@@ -34,13 +36,20 @@ public class BoardDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getWdate() {
+	public Timestamp getWdate() {
 		return Wdate;
 	}
-	public void setWdate(Date wdate) {
+	public void setWdate(Timestamp wdate) {
 		Wdate = wdate;
 	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 
+	
 	
 	
 }

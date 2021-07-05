@@ -8,11 +8,5 @@
 </head>
 <body>
 
-<script>
-alert("삭제 되었습니다. ");
-location.href="list";
-</script>
-
-
 </body>
 </html>

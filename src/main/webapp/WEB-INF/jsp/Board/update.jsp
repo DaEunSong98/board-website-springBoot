@@ -44,7 +44,7 @@
 </table>
 <input type="submit" value="수정하기"/>
 
-<button id="delete" onclick="javascript:location.href='delete?idx=${dto.idx}';">삭제하기</button>
+<button id="delete_btn" type="button" >삭제하기</button>
 
 
 </form>
@@ -63,6 +63,11 @@ $("#updateForm").submit(function(){
 		alert("글이 수정 되었습니다. ");
 	
 	});
+	
+	$('#delete_btn').click(function(){
+		if(confirm("삭제하겠습니까?"))
+			location.href='delete?idx=${dto.idx}';
+	})
 	
 </script>
 

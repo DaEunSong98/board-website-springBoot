@@ -27,3 +27,23 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+	$('#joinForm').submit(function(){
+		if(id_check==false || pw_check==false || pw2_check==false || name_check==false
+			|| email_check==false){
+			return false;
+		}
+		else{
+			alert("회원가입이 완료되었습니다.");
+		}
+	});
+	

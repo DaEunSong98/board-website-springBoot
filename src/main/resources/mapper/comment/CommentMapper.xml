@@ -1,0 +1,19 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.page.demo.board.dao.BoardDAO">
+
+<select id="listWithPaging" resultType= "com.page.demo.board.dto.BoardDTO">
+
+<![CDATA[
+	select 
+		idx,title,wdate,writer
+		from(select rownum rnum, idx,title,wdate,writer 
+			from board where rownum <= #{pageNo} * #{countPerp})
+			where rnum>(#{pageNo}-1) * #{countPerp}
+]]>
+
+</select>
+</mapper> -->
