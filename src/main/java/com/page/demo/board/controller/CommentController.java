@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.page.demo.board.dto.CommentDTO;
+import com.page.demo.board.paging.Criteria;
 import com.page.demo.board.service.CommentService;
 import com.page.demo.member.dto.MemberDTO;
 
@@ -25,18 +26,28 @@ public class CommentController {
 	@Autowired
 	CommentService cs;
 	
-
 	@ResponseBody
 	@PostMapping("list")
-	public ArrayList<CommentDTO> ComentList(@RequestParam("board_idx")int board_idx,Model model) {
-		
-		return cs.list(board_idx);
+	public ArrayList<CommentDTO> ComentList(@RequestParam("board_idx")int board_idx,Model model
+			,Criteria criteria) {
+		return cs.list(board_idx,criteria);
 	}
+	
+	/*@PostMapping("list")
+	public ModelAndView ComentList(@RequestParam("board_idx")int board_idx,ModelAndView mv
+			,Criteria criteria) {
+		System.out.println("값이 들어왔나 체크");
+		mv.setViewName("Board/Comment/insert");
+		mv.addObject("list",cs.list(board_idx));
+		
+		return mv;
+	}*/
+	
 	
 	@GetMapping("insert")
 	public String GetComentInsert(@RequestParam("board_idx")int board_idx,Model model) {
 		model.addAttribute("board_idx",board_idx);
-		return "Board/Comment/insert";
+		return "Board/view";
 	}
 	
 	@ResponseBody
@@ -44,7 +55,6 @@ public class CommentController {
 	public String PostComentInsert(CommentDTO dto, HttpSession session,Model model) {
 		MemberDTO tmp=(MemberDTO) session.getAttribute("member");
 		dto.setWriter(tmp.getId());
-		System.out.println(dto.getWriter());
 		
 		return cs.insert(dto);
 	}

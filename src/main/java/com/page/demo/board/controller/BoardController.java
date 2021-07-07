@@ -9,11 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.page.demo.board.dto.BoardDTO;
 import com.page.demo.board.paging.Criteria;
 import com.page.demo.board.service.BoardService;
+import com.page.demo.board.service.CommentService;
 import com.page.demo.member.dto.MemberDTO;
 
 @Controller
@@ -21,6 +22,13 @@ public class BoardController {
 
 	@Autowired
 	BoardService bs;
+	
+	@GetMapping("index")
+	public String index() {
+	
+	return "index";
+
+}
 	
 	
 	@GetMapping("home")
@@ -30,7 +38,7 @@ public class BoardController {
 
 	}
 	
-	@GetMapping("/board/list/{pageNo}")
+	@GetMapping("/board/list")
 	public String ListBoard(Model model,Criteria criteria) {
 		bs.list(model,criteria);
 		return "Board/list";
@@ -55,8 +63,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/board/view")
-	public String GetViewBoard(@RequestParam("idx") int idx, Model model) {
-		bs.view(idx,model);
+	public String GetViewBoard(@RequestParam("idx") int idx, Model model,Criteria criteria) {
+		bs.view(idx,model,criteria);
 		return "Board/view";
 	}
 	
@@ -77,6 +85,13 @@ public class BoardController {
 		bs.delete(idx);
 		
 		return "Board/delete";
+	}
+	
+
+	@PostMapping("/board/search")
+	public String SearchBoard(@RequestParam("keyword")String search,Model model2) {
+		bs.search(search,model2);
+		return "redirect:/board/list/1";
 	}
 	
 		

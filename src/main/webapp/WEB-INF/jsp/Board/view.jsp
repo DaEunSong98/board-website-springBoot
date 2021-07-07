@@ -30,10 +30,55 @@
 </table>
 
 	<c:if test="${member.id==dto.writer}">
-		<a href="update?idx=${dto.idx}">수정하기</a><br>
+		<a href="/board/update?idx=${dto.idx}">수정하기</a><br>
 	</c:if>
+	
+	<c:choose>
+	<c:when test="${empty member.id}">
+		<a href="/member/login">로그인후 이용가능 합니다. </a><br>
+	</c:when>
 
-	<!-- 댓글 부분 추가  -->
+	<c:otherwise>
+			
+		댓글수 : ${count }<br>
+		<input type="text" id="content" name="content"/>
+		<button id="insert_btn" type="submit">작성</button>
+		
+			
+	<!-- 리스트 출력 부분 -->
 	<%@include file="Comment/insert.jsp" %>
+	
+	<c:if test="${pageMaker.prev}">
+			<a href="${pageMaker.startPage-1 }?idx=${dto.idx}">이전</a>
+		</c:if>
+	
+	
+		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+	    	<!--  <li class = "paginate_button"> -->
+	    	<a href="/board/view?idx=${dto.idx}&pageNo=${num}" style="color:
+	    	<c:if test="${pageMaker.criteria.pageNo == num}">black;</c:if>
+	    	<c:if test="${pageMaker.criteria.pageNo != num}">grey;</c:if>">${num}</a>
+	
+	    </c:forEach>
+
+
+		<c:if test="${pageMaker.next}">
+			<a href="${pageMaker.endPage+1}?idx=${dto.idx}">다음</a>
+		</c:if>
+		
+		
+		<form id="pageForm" action="view" method="post">
+			<input type="hidden" name="pageNo" value="${pageMaker.criteria.pageNo}"/>
+			<input type="hidden" name="countPerp" value="${pageMaker.criteria.countPerp}"/>
+		</form>	
+	</c:otherwise>
+</c:choose>
+
+
+
+	
+		
+
+
 </body>
 </html>

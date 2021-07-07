@@ -11,6 +11,14 @@
 <body>
 
 <h2>게시글 목록 </h2>
+
+<form action="/board/search" method="post">
+
+<input type="text" name="keyword" id="keyword"/>
+<button type="submit" id="search_btn">검색</button>
+
+</form>
+
 <table border=1>
 <c:choose>	
 	<c:when test="${list.size()!=0}">
@@ -35,16 +43,16 @@
 	
 </table>
 
-<a href="insert">글 작성하기</a><br><br>
+<a href="/board/insert">글 작성하기</a><br><br>
 
-<c:if test="${pageMaker.prev}">
+	<c:if test="${pageMaker.prev}">
 			<a href="${pageMaker.startPage-1 }">이전</a>
 		</c:if>
 	
 	
 		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 	    	<!--  <li class = "paginate_button"> -->
-	    	<a href="${num}" style="color:
+	    	<a href="/board/list?pageNo=${num}" style="color:
 	    	<c:if test="${pageMaker.criteria.pageNo == num}">black;</c:if>
 	    	<c:if test="${pageMaker.criteria.pageNo != num}">grey;</c:if>">${num}</a>
 	

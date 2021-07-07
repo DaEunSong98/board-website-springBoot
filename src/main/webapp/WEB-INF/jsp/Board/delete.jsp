@@ -10,7 +10,7 @@
 
 <script>
 alert("삭제 되었습니다. ");
-location.href="list";
+location.href="list/1";
 </script>
 
 

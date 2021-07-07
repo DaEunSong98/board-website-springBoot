@@ -37,13 +37,14 @@ public interface BoardMapper {
 	
 	@Select("select \r\n" + 
 			"		idx,title,wdate,writer\r\n" + 
-			"		from(select rownum rnum, idx,title,wdate,writer \r\n" + 
-			"			from board where rownum <= #{pageNo} * #{countPerp} order by idx desc)\r\n" + 
+			"		from(select rownum rnum, idx,title,wdate,writer" + 
+			"			from board where rownum <= #{pageNo} * #{countPerp} order by idx desc)" + 
 			"			where rnum>(#{pageNo}-1) * #{countPerp}")
 	public ArrayList<BoardDTO> list(Criteria criteria);
 
 	@Select ("select count(*) from board") 
 	public int count();
 
-
+	@Select("select * from board where title LIKE #{search} OR contents LIKE #{search} ")
+	public ArrayList<BoardDTO> search (String search);
 }

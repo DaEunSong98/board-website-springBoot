@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.page.demo.board.dto.CommentDTO;
 import com.page.demo.board.mapper.CommentMapper;
+import com.page.demo.board.paging.Criteria;
 
 @Service
 public class CommentService {
@@ -18,9 +18,9 @@ public class CommentService {
 	CommentMapper mapper;
 	
 
-	public ArrayList<CommentDTO> list(int board_idx) {
+	public ArrayList<CommentDTO> list(int board_idx,Criteria criteria) {
 		// TODO Auto-generated method stub
-		return mapper.list(board_idx);
+		return mapper.list(board_idx,criteria);
 	}
 
 	public String insert(CommentDTO dto) {

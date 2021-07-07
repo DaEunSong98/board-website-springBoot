@@ -11,28 +11,12 @@
 </head>
 <body>
 
-<c:choose>
-	<c:when test="${empty member.id}">
-		<a href="/member/login">로그인후 이용가능 합니다. </a>
-	</c:when>
-
-	<c:otherwise>
-		<input type="text" id="content" name="content"/>
-		<button id="insert_btn" type="submit">작성</button>
-		
-			
-	<!-- 리스트 출력 부분 -->
-	<div id="replyList"></div>
-		
-	</c:otherwise>
-</c:choose>
 
 
+<div id="replyList"></div>
 
 
 <script>
-
-
 $(document).ready(function(){
 	replyList();
 	
@@ -58,15 +42,13 @@ $(document).ready(function(){
 	});
 	
 });
-
-
 function replyList(){
 	console.log("1");
 	console.log(${idx});
 	$.ajax({
 		type:"post",
 		url: "/comment/list",
-		data:{"board_idx":${dto.idx}},
+		data:{"board_idx":${dto.idx},"pageNo":${pageMaker.criteria.pageNo}},
 		dataType:'json',
 		success:function(data){
 			var htmls="";
@@ -74,8 +56,6 @@ function replyList(){
 				htmls+="등록된 댓글이 없습니다.";
 			}
 			else{
-				
-				htmls+='댓글 수: '+data.length;
 				$(data).each(function(){
 					htmls+='<div id="'+this.idx+'">'
 					htmls+=this.idx+"   "+this.writer+'   '+this.content+'    '+this.wdate
@@ -87,27 +67,21 @@ function replyList(){
 				});
 			}
 			$('#replyList').html(htmls);
+		
 		}
 	});
 	
-
-
 }
-
-
 function ClickUpdate(idx,content){
 	console.log(content);
 	htmls="";
 	htmls+='<input type="hidden" id="idx" name="idx" value='+idx+'></input>'
 	htmls+='<input type="text" name="edit_content" id="edit_content'+'" value='+content+'></input>'
 	htmls+='<button type="submit" id="update_btn" onclick="update('+idx+')">수정</button>'
-
 	
 	$('#'+idx).replaceWith(htmls);  //리플레이스가 안됨퓨ㅠㅠㅠㅠㅠ--테이블 떄문이었음!
-
 	
 }
-
 function update(idx){
 	var edit_content=$('#edit_content').val();
 	$.ajax({
@@ -126,7 +100,6 @@ function update(idx){
 		}
 	});
 }
-
 function ClickDelete(idx){
 	if(confirm("댓글을 삭제하시겠습니까?")){
 		$.ajax({
@@ -147,11 +120,6 @@ function ClickDelete(idx){
 	}
 	
 }
-
-
-
-
-
 </script>
 
 
