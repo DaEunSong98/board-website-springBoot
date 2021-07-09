@@ -23,13 +23,6 @@ public class BoardController {
 	@Autowired
 	BoardService bs;
 	
-	@GetMapping("index")
-	public String index() {
-	
-	return "index";
-
-}
-	
 	
 	@GetMapping("home")
 		public String Home() {

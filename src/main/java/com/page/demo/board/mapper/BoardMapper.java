@@ -36,8 +36,8 @@ public interface BoardMapper {
 	public void updateHit(BoardDTO dtp);
 	
 	@Select("select \r\n" + 
-			"		idx,title,wdate,writer\r\n" + 
-			"		from(select rownum rnum, idx,title,wdate,writer" + 
+			"		idx,title,wdate,writer,hit\r\n" + 
+			"		from(select rownum rnum, idx,title,wdate,writer,hit" + 
 			"			from board where rownum <= #{pageNo} * #{countPerp} order by idx desc)" + 
 			"			where rnum>(#{pageNo}-1) * #{countPerp}")
 	public ArrayList<BoardDTO> list(Criteria criteria);

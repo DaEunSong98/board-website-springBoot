@@ -7,13 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
 
+	<!-- 리스트 출력 부분 -->
+	<div id="replyList"></div>
 
-
-<div id="replyList"></div>
 
 
 <script>
@@ -48,7 +49,7 @@ function replyList(){
 	$.ajax({
 		type:"post",
 		url: "/comment/list",
-		data:{"board_idx":${dto.idx},"pageNo":${pageMaker.criteria.pageNo}},
+		data:{"board_idx":${dto.idx}},
 		dataType:'json',
 		success:function(data){
 			var htmls="";
@@ -56,9 +57,12 @@ function replyList(){
 				htmls+="등록된 댓글이 없습니다.";
 			}
 			else{
+				
+				htmls+='댓글 수: '+data.length;
 				$(data).each(function(){
 					htmls+='<div id="'+this.idx+'">'
-					htmls+=this.idx+"   "+this.writer+'   '+this.content+'    '+this.wdate
+					htmls+='<strong>'+this.writer+'</strong>'
+					htmls+='    '+this.content+'<br>'
 					if(this.writer=="${member.id}"){
 						htmls+='<button id="updateBtn" onclick="ClickUpdate('+this.idx+',\''+this.content+'\')">수정</button><br>'
 						htmls+='<button id="deleteBtn" onclick="ClickDelete('+this.idx+')">삭제</button><br>'
@@ -67,7 +71,6 @@ function replyList(){
 				});
 			}
 			$('#replyList').html(htmls);
-		
 		}
 	});
 	
@@ -76,7 +79,7 @@ function ClickUpdate(idx,content){
 	console.log(content);
 	htmls="";
 	htmls+='<input type="hidden" id="idx" name="idx" value='+idx+'></input>'
-	htmls+='<input type="text" name="edit_content" id="edit_content'+'" value='+content+'></input>'
+	htmls+='<input type="text" class="form-control" name="edit_content" id="edit_content'+'" value='+content+'></input>'
 	htmls+='<button type="submit" id="update_btn" onclick="update('+idx+')">수정</button>'
 	
 	$('#'+idx).replaceWith(htmls);  //리플레이스가 안됨퓨ㅠㅠㅠㅠㅠ--테이블 떄문이었음!

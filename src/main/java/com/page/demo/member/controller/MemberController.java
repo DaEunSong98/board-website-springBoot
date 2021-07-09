@@ -57,8 +57,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public String PostJoinMember(@RequestParam("pw_check")String pw_check,
-			@Valid MemberDTO dto, BindingResult result, RedirectAttributes rttr){
+	public String PostJoinMember( MemberDTO dto, BindingResult result, RedirectAttributes rttr){
 	
 		/*if(result.hasErrors()) {
 			List<ObjectError>list=result.getAllErrors();
@@ -91,8 +90,8 @@ public class MemberController {
 	}
 	
 	@PostMapping("login")
-	public String PostLoginMember(MemberDTO dto, HttpSession session){
-			ms.login(dto.getId(),dto.getPw(), session);
+	public String PostLoginMember(MemberDTO dto, HttpSession session,Model model){
+			ms.login(dto.getId(),dto.getPw(), session,model);
 		return "Member/login";
 	}
 
@@ -104,21 +103,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String PostUpdateMember(MemberDTO dto, HttpSession session,RedirectAttributes rttr){
+	public String PostUpdateMember(MemberDTO dto, HttpSession session){
 			MemberDTO tmp=(MemberDTO)session.getAttribute("member");
 			dto.setId(tmp.getId());
-			//비밀번호가 일치하지 않는 경우 
-			if(!dto.getPw().equals(tmp.getPw())) {
-				rttr.addFlashAttribute("msg",false);
-				
-			}
-			//비밀번호가 일치하는 경우 
-			else {
-				ms.update(dto);
-				rttr.addFlashAttribute("msg",true);
-			}
-			
-			return "redirect:/member/update";
+			ms.update(dto,session);
+			return "redirect:home";
 	}
 	
 	

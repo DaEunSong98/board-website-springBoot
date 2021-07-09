@@ -31,20 +31,28 @@ public class MemberService {
 
 
 	public void login(@RequestParam(value="id") String id,
-			@RequestParam(value="pw") String pw, HttpSession session) {
+			@RequestParam(value="pw") String pw, HttpSession session,Model model) {
 		
 		MemberDTO tmp = mapper.selectId(id);
-		if(tmp != null && id != "") {
+		if(tmp==null) {
+			model.addAttribute("login",-1);
+		}
+		else {
 			if(tmp.getPw().equals(pw)) {
 				session.setAttribute("member",tmp );
+			}
+			else {
+				model.addAttribute("login",0);
+				model.addAttribute("dto",id);
 			}
 		}
 	}
 
 
-	public void update(MemberDTO dto) {
+	public void update(MemberDTO dto,HttpSession session) {
 		// TODO Auto-generated method stub
 		mapper.update(dto);
+		session.setAttribute("member",dto);
 	}
 
 

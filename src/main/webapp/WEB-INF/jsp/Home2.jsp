@@ -4,24 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>My Blog Story</title>
+
 <link rel="stylesheet" href="{%static 'css/bootstrap.css'%}">
 <link rel="stylesheet" href="{%static 'css/custom.min.css'%}">
 <link rel="stylesheet" href="{%static 'css/font-awesome.min.css'%}">
 <link rel="stylesheet" href="{%static 'css/prism-okaidia.css'%}">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23019901-1"></script>
-
 </head>
-
-
-<body>
-
+   
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/home">My Blog</a>
+    <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,31 +27,19 @@
     <div class="navbar-collapse collapse" id="navbarColor03" style="">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="home">홈
+          <a class="nav-link active" href="#">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        
-     <c:choose>
-		<c:when test="${empty member.id }">	
         <li class="nav-item">
-          <a class="nav-link" href="member/login">로그인</a>
+          <a class="nav-link" href="#">Features</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="member/join">회원가입</a>
-        </li>
-        </c:when>
-        <c:otherwise>
-          <li class="nav-item">
-          	<a class="nav-link" href="member/logout">로그아웃</a>
+          <a class="nav-link" href="#">Pricing</a>
         </li>
         <li class="nav-item">
-          	<a class="nav-link" href="member/update">회원정보수정</a>
+          <a class="nav-link" href="#">About</a>
         </li>
-        </c:otherwise>
-     </c:choose>
-        
-        
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
@@ -74,10 +60,7 @@
 </nav>
 
 
-
-
 <a href="board/list">자유게시판</a>
-
 <c:choose>
 	<c:when test="${empty member.id }">	
 		<a href="member/login">로그인</a>
@@ -105,11 +88,6 @@
 	B
 	</div>
 </div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 
 </body>

@@ -6,7 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="{%static 'css/bootstrap.css'%}">
+<link rel="stylesheet" href="{%static 'css/custom.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font-awesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/prism-okaidia.css'%}">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23019901-1"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
 </head>
 <body>
 
@@ -17,13 +24,16 @@
 		</script>
 </c:if>	
 
-
-<form id="insertForm" action="insert" method="post" enctype="multipart/form-data">
-	제목: <input type="text" id="title" name="title"><br>
-	<!-- 첨부파일: <input type="file" name="file" multiple> -->
-	내용: <input type="text" id="contents" name="contents"><br>
-	<input type="submit" value="글 작성"/>
+<form id="insertForm" action="insert" method="post">
+	<table class="table table-hover">
+	
+		<tr><td>제목:<input type="text" class="form-control" name="title" id="title"/></td></tr>
+		<tr>
+			<td>내용: <textarea name="contents" class="form-control" id="contents" ></textarea></td>
+	</table>
+	<button class="btn btn-primary" type="submit" >글 작성</button>
 </form>
+
 
 <script>
 $("#insertForm").submit(function(){

@@ -41,13 +41,6 @@ public class BoardService {
 		PagingDTO dto=new PagingDTO(criteria,mapper.count());
 		list=mapper.list(criteria);
 		model.addAttribute("pageMaker",dto);
-		System.out.println("게시판 페이지: "+criteria.getPageNo());
-		System.out.println("prev:"+dto.getPrev());
-		System.out.println("next"+dto.getNext());
-		System.out.println("next"+dto.getStartPage());
-		System.out.println("next"+dto.getEndPage());
-		
-		
 		//list=mapper.listWithPaging(criteria);
 		model.addAttribute("list",list);
 	}

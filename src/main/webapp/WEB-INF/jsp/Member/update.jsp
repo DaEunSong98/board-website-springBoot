@@ -4,10 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script>
-</script>
+<meta charset="UTF-8"><title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="{%static 'css/bootstrap.css'%}">
+<link rel="stylesheet" href="{%static 'css/custom.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font-awesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/prism-okaidia.css'%}">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23019901-1"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
 
@@ -20,31 +24,32 @@
 			location.href='login';
 	</script>
 </c:when>
-
 <c:otherwise>
-		<form action="update" method="post" onsubmit="return confirm('수정하시겠습니까?');">
-			아이디: ${member.id}<br>
-			이름: <input type="text" name="name" value="${member.name}"/><br>	
-			이메일: <input type="text" name="email" value="${member.email}"><br>	
-			주소: <input type="text" name="address" value="${member.address} "><br>	
-	 		전화번호: <input type="text" name="mobile" value="${member.mobile }"  ><br>
-	 		수정 시 확인을 위한 본인 패스워드를 입력하세요<br>
-	 		패스워드: <input type="password" name="pw" placeholder="패스워드"/><br>	
-	 		
-	 		
-			<input type="submit" value="수정완료">
-			<input type="button" value="취소" onclick="javascript:location.href='home';">
-		</form>
+	<form id="updateForm" action="update" method="post"onsubmit="return confirm('수정하시겠습니까?');">
+		<table class="table table-hover">
+			<tr><td>아이디: ${member.id }</td></tr>
+			<tr><td>이름: <p class="text-danger" id="nameCheck"></p> <input type="text" class="form-control" name="name" id="name" value="${member.name }"/></td></tr>
+			<tr><td>이메일: <input type="email" class="form-control" name="email" value="${member.email}"/>
+			<tr><td>주소: <input type="text" class="form-control" name="address" value="${member.address} "></td></tr>	
+	 		<tr><td>전화번호: <input type="text" class="form-control" name="mobile" value="${member.mobile }"  ></td></tr>
+		</table>
+		<button class="btn btn-primary" type="submit" >수정</button>
+</form>
 </c:otherwise>
 </c:choose>
 
-<c:if test="${msg==false}">
-	<script>alert("비밀번호가 일치하지 않습니다. 다시 수정해주세요.")</script>	
-</c:if>
-<c:if test="${msg==true}">
-	<script>alert("정보 수정이 완료되었습니다. ");
-			location.href='/home';
-	</script>	
-</c:if>
+<script>
+$(document).ready(function(){
+	$('#updateForm').submit(function(){
+		if($('#name').val()==""){
+			$('#nameCheck').text("이름을 입력해주세요");
+			$('#nameCheck').focus();
+			return false;
+		}
+		alert('회원정보가 수정되었습니다.');
+	});
+});
+</script>
+
 </body>
 </html>
